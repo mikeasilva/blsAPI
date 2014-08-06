@@ -3,7 +3,7 @@
 \name{blsAPI}
 \alias{blsAPI}
 \alias{blsAPI-package}
-\title{blsAPI}
+\title{Request data through the BLS API}
 \usage{
 blsAPI(data = NA)
 }
