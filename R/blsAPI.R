@@ -3,9 +3,11 @@
 #' @title Request data from the Bureau of Labor Statistics' API
 #' @description Allows users to request data for one or multiple series through the BLS API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
 #' @details See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details.
-#' @param payload data sent to the API.
+#' @param payload a string or a list containing data to be sent to the API.
 #' @keywords bls api economics
+#' @import rjson RCurl
 #' @examples
+#' \dontrun{
 #' ## These examples are taken from http://www.bls.gov/developers/api_signature.htm
 #' 
 #' ## Single Series request
@@ -24,6 +26,7 @@
 #'  'endyear'=2012)
 #' response <- blsAPI(payload)
 #' json <- fromJSON(response)
+#' }
 
 blsAPI <- function(payload=NA){
   #library(rjson)

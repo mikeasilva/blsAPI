@@ -7,7 +7,7 @@
 blsAPI(payload = NA)
 }
 \arguments{
-\item{payload}{data sent to the API.}
+\item{payload}{a string or a list containing data to be sent to the API.}
 }
 \description{
 Allows users to request data for one or multiple series through the BLS API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
@@ -16,6 +16,7 @@ Allows users to request data for one or multiple series through the BLS API.  Us
 See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details.
 }
 \examples{
+\dontrun{
 ## These examples are taken from http://www.bls.gov/developers/api_signature.htm
 
 ## Single Series request
@@ -34,6 +35,7 @@ payload <- list(
  'endyear'=2012)
 response <- blsAPI(payload)
 json <- fromJSON(response)
+}
 }
 \keyword{api}
 \keyword{bls}
