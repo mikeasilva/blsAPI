@@ -6,7 +6,7 @@ Description: Allows users to request data for one or multiple series through
     the BLS API.  Users provide parameters as specified in
     http://www.bls.gov/developers/api_signature.htm and the function returns a
     JSON string.
-Depends: rjson, RCurl, R (>= 3.1.1)
+Depends: R (>= 3.1.1)
+Imports: rjson, RCurl
 License: GPL (>= 2)
 LazyData: true
-Suggests: testthat
