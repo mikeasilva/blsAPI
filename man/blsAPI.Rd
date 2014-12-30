@@ -2,12 +2,14 @@
 % Please edit documentation in R/blsAPI.R
 \name{blsAPI}
 \alias{blsAPI}
-\title{Request data from the Bureau of Labor Statistics' API}
+\title{Request Data From The Bureau Of Labor Statistics' API}
 \usage{
-blsAPI(payload = NA)
+blsAPI(payload = NA, api.version = 1)
 }
 \arguments{
 \item{payload}{a string or a list containing data to be sent to the API.}
+
+\item{api.version}{an integer for which api version you want to use (i.e. 1 for v1, 2 for v2)}
 }
 \description{
 Allows users to request data for one or multiple series through the BLS API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
@@ -16,8 +18,8 @@ Allows users to request data for one or multiple series through the BLS API.  Us
 See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details.
 }
 \examples{
-\dontrun{
-## These examples are taken from http://www.bls.gov/developers/api_signature.htm
+#' ## These examples are taken from http://www.bls.gov/developers/api_signature.htm
+library(rjson)
 
 ## Single Series request
 response <- blsAPI('LAUCN040010000000005')
@@ -35,7 +37,6 @@ payload <- list(
  'endyear'=2012)
 response <- blsAPI(payload)
 json <- fromJSON(response)
-}
 }
 \keyword{api}
 \keyword{bls}

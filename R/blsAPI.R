@@ -1,14 +1,16 @@
 ## blsAPI.R
 #
-#' @title Request data from the Bureau of Labor Statistics' API
+#' @title Request Data From The Bureau Of Labor Statistics' API
 #' @description Allows users to request data for one or multiple series through the BLS API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
 #' @details See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details.
 #' @param payload a string or a list containing data to be sent to the API.
+#' @param api.version an integer for which api version you want to use (i.e. 1 for v1, 2 for v2)
 #' @keywords bls api economics
+#' @export blsAPI
 #' @import rjson RCurl
 #' @examples
-#' \dontrun{
-#' ## These examples are taken from http://www.bls.gov/developers/api_signature.htm
+#' #' ## These examples are taken from http://www.bls.gov/developers/api_signature.htm
+#' library(rjson)
 #' 
 #' ## Single Series request
 #' response <- blsAPI('LAUCN040010000000005')
@@ -26,9 +28,8 @@
 #'  'endyear'=2012)
 #' response <- blsAPI(payload)
 #' json <- fromJSON(response)
-#' }
 
-blsAPI <- function(payload=NA){
+blsAPI <- function(payload=NA, api.version=1){
   #library(rjson)
   #library(RCurl)
   h = basicTextGatherer()
@@ -37,10 +38,11 @@ blsAPI <- function(payload=NA){
     message('blsAPI: No parameters specified.')
   }
   else{
+    api.url <- paste0('http://api.bls.gov/publicAPI/v',api.version,'/timeseries/data/')
     ## Parameters specified so make the request
     if(is.list(payload)){
       ## Multiple Series or One or More Series, Specifying Years request
-      curlPerform(url='http://api.bls.gov/publicAPI/v1/timeseries/data/',
+      curlPerform(url=api.url,
                 httpheader=c('Content-Type' = "application/json;"),
                 postfields=toJSON(payload),
                 verbose = FALSE, 
@@ -48,7 +50,7 @@ blsAPI <- function(payload=NA){
       )
     }else{
       ## Single Series request
-      curlPerform(url=paste0('http://api.bls.gov/publicAPI/v1/timeseries/data/',payload),
+      curlPerform(url=paste0(api.url,payload),
                 verbose = FALSE, 
                 writefunction = h$update
       )
