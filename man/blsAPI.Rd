@@ -2,7 +2,7 @@
 % Please edit documentation in R/blsAPI.R
 \name{blsAPI}
 \alias{blsAPI}
-\title{Request Data From The Bureau Of Labor Statistics' API}
+\title{Request Data From The U.S. Bureau Of Labor Statistics' API}
 \usage{
 blsAPI(payload = NA, api.version = 1)
 }
@@ -12,15 +12,17 @@ blsAPI(payload = NA, api.version = 1)
 \item{api.version}{an integer for which api version you want to use (i.e. 1 for v1, 2 for v2)}
 }
 \description{
-Allows users to request data for one or multiple series through the BLS API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
+Allows users to request data for one or multiple series through the U.S. Bureau of Labor Statistics' API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
 }
 \details{
-See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details.
+See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details on the payload.
 }
 \examples{
-#' ## These examples are taken from http://www.bls.gov/developers/api_signature.htm
+## These examples are taken from http://www.bls.gov/developers/api_signature.htm
 library(rjson)
+library(blsAPI)
 
+## API Version 1.0 R Script Sample Code
 ## Single Series request
 response <- blsAPI('LAUCN040010000000005')
 json <- fromJSON(response)
@@ -32,10 +34,32 @@ json <- fromJSON(response)
 
 ## One or More Series, Specifying Years
 payload <- list(
- 'seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'),
- 'startyear'=2010,
- 'endyear'=2012)
+  'seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'),
+  'startyear'=2010,
+  'endyear'=2012)
 response <- blsAPI(payload)
+json <- fromJSON(response)
+
+## API Version 2.0 R Script Sample Code
+## Single Series
+response <- blsAPI('LAUCN040010000000005', 2)
+json <- fromJSON(response)
+
+## Multiple Series
+payload <- list('seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'))
+response <- blsAPI(payload, 2)
+json <- fromJSON(response)
+
+## One or More Series with Optional Parameters
+payload <- list(
+  'seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'),
+  'startyear'=2010,
+  'endyear'=2012,
+  'catalog'=FALSE,
+  'calculations'=TRUE,
+  'annualaverage'=TRUE,
+  'registrationKey'='995f4e779f204473aa565256e8afe73e')
+response <- blsAPI(payload, 2)
 json <- fromJSON(response)
 }
 \keyword{api}
