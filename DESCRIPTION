@@ -1,7 +1,8 @@
 Package: blsAPI
 Version: 0.1.1
-Title: Request Data From The U.S. Bureau of Labor Statistics' API
-Authors@R: "Michael Silva <mike.a.silva@gmail.com> [aut, cre]"
+Title: Request Data From The U.S. Bureau of Labor Statistics API
+Author: Michael Silva <mike.a.silva@gmail.com>
+Maintainer: Michael Silva <mike.a.silva@gmail.com>
 Description: Allows users to request data for one or multiple series through the U.S. Bureau of Labor Statistics API.  Users provide parameters as specified in http://www.bls.gov/developers/api_signature.htm and the function returns a JSON string.
 Depends: R (>= 3.1.1)
 Imports: rjson, RCurl

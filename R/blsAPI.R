@@ -1,7 +1,7 @@
 ## blsAPI.R
 #
-#' @title Request Data From The U.S. Bureau Of Labor Statistics' API
-#' @description Allows users to request data for one or multiple series through the U.S. Bureau of Labor Statistics' API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
+#' @title Request Data From The U.S. Bureau Of Labor Statistics API
+#' @description Allows users to request data for one or multiple series through the U.S. Bureau of Labor Statistics API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
 #' @details See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details on the payload.
 #' @param payload a string or a list containing data to be sent to the API.
 #' @param api.version an integer for which api version you want to use (i.e. 1 for v1, 2 for v2)

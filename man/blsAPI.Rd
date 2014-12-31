@@ -2,7 +2,7 @@
 % Please edit documentation in R/blsAPI.R
 \name{blsAPI}
 \alias{blsAPI}
-\title{Request Data From The U.S. Bureau Of Labor Statistics' API}
+\title{Request Data From The U.S. Bureau Of Labor Statistics API}
 \usage{
 blsAPI(payload = NA, api.version = 1)
 }
@@ -12,7 +12,7 @@ blsAPI(payload = NA, api.version = 1)
 \item{api.version}{an integer for which api version you want to use (i.e. 1 for v1, 2 for v2)}
 }
 \description{
-Allows users to request data for one or multiple series through the U.S. Bureau of Labor Statistics' API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
+Allows users to request data for one or multiple series through the U.S. Bureau of Labor Statistics API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string.
 }
 \details{
 See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details on the payload.
