@@ -136,7 +136,7 @@ gr.start <- as.POSIXct(strptime('1December2007', '%d%B%Y'))
 gr.end <- as.POSIXct(strptime('1June2009', '%d%B%Y'))
 
 ## Plot the data
-ggplot(df) + geom_rect(aes(xmin = gr.start, xmax = gr.end, ymin = -Inf, ymax = Inf), alpha = 0.4, fill="#DDDDDD") + geom_line(aes(date, unemployment.rate*100)) + xlab('') + ylab('Percent of labor force')  + xlab('Great Recession shaded in gray') + ggtitle('Unemployment Rate for Manhattan, NY (Jan 2007 to Dec 2010)') + theme_bw()
+ggplot(df) + geom_rect(aes(xmin = gr.start, xmax = gr.end, ymin = -Inf, ymax = Inf), alpha = 0.4, fill="#DDDDDD") + geom_line(aes(date, unemployment.rate*100)) + ylab('Percent of labor force')  + xlab('Great Recession shaded in gray') + ggtitle('Unemployment Rate for Manhattan, NY (Jan 2007 to Dec 2010)') + theme_bw()
 ```
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png) 
