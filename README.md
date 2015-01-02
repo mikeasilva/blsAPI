@@ -22,7 +22,7 @@ install_github('blsAPI')
 ```
 
 ### API Basics  
-The blsAPI package supports two versions of the BLS API.  API Version 2.0 requires registration, and it offers greater query limits. It also allows users to request net and percent changes and series description information. See below for more details.
+The blsAPI package supports two versions of the BLS API.  API Version 2.0 requires registration and offers greater query limits. It also allows users to request net and percent changes and series description information. See below for more details.
 
 
 
@@ -68,10 +68,20 @@ The resulting data frame looks like this (Note: Your results may look different 
 
 |  year  |  period  |  periodName  |  value  |
 |:------:|:--------:|:------------:|:-------:|
-|   NA   |    NA    |      NA      |   NA    |
+|  2014  |   Q03    | 3rd Quarter  |   2.2   |
+|  2014  |   Q02    | 2nd Quarter  |   2.0   |
+|  2014  |   Q01    | 1st Quarter  |   1.8   |
+|  2013  |   Q04    | 4th Quarter  |   2.0   |
+|  2013  |   Q03    | 3rd Quarter  |   1.9   |
+|  2013  |   Q02    | 2nd Quarter  |   1.9   |
+|  2013  |   Q01    | 1st Quarter  |   1.9   |
+|  2012  |   Q04    | 4th Quarter  |   1.9   |
+|  2012  |   Q03    | 3rd Quarter  |   1.9   |
+|  2012  |   Q02    | 2nd Quarter  |   1.7   |
+|  2012  |   Q01    | 1st Quarter  |   1.9   |
 
 #### Example 2
-This example pulls the pre and post Great Recession monthly unemployment estimates and labor force estimates for Manhattan (New York County, NY) using the version 2.0 API, and graphs a calculated unemployment rate.  According the [National Bureau of Economic Research (NBER)](http://www.nber.org/cycles.html) the Great Recession ran from December 2007 to June 2009.
+This example pulls monthly unemployment and labor force estimates for Manhattan (New York County, NY) using the version 2.0 API.  We graph a calculated unemployment rate including shading for the Great Recession.  According the [National Bureau of Economic Research (NBER)](http://www.nber.org/cycles.html) the Great Recession ran from December 2007 to June 2009.
 
 
 ```r
@@ -120,13 +130,7 @@ df <- merge(unemployed.df, labor.force.df)
 ## Create date and unemployement rate
 df$unemployment.rate <- df$unemployed / df$labor.force
 df$date <- as.POSIXct(strptime(paste0('1',df$periodName,df$year), '%d%B%Y'))
-```
 
-```
-## Error in `$<-.data.frame`(`*tmp*`, "date", value = structure(NA_real_, class = c("POSIXct", : replacement has 1 row, data has 0
-```
-
-```r
 ## Beginning and end dates for the Great Recession (used in shaded area)
 gr.start <- as.POSIXct(strptime('1December2007', '%d%B%Y'))
 gr.end <- as.POSIXct(strptime('1June2009', '%d%B%Y'))
@@ -135,10 +139,7 @@ gr.end <- as.POSIXct(strptime('1June2009', '%d%B%Y'))
 ggplot(df) + geom_rect(aes(xmin = gr.start, xmax = gr.end, ymin = -Inf, ymax = Inf), alpha = 0.4, fill="#DDDDDD") + geom_line(aes(date, unemployment.rate*100)) + xlab('') + ylab('Percent of labor force')  + xlab('Great Recession shaded in gray') + ggtitle('Unemployment Rate for Manhattan, NY (Jan 2007 to Dec 2010)') + theme_bw()
 ```
 
-```
-## Error: Aesthetics must either be length one, or the same length as the dataProblems:unemployment.rate * 100
-```
-
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png) 
 
 ## Learning More
 With the basics described above you can get started with the BLS API right away. To learn more see:  
@@ -147,4 +148,5 @@ With the basics described above you can get started with the BLS API right away.
 * [BLS API FAQ](http://www.bls.gov/developers/api_faqs.htm) 
 * [BLS Help & Tutorials: Series ID Formats](http://www.bls.gov/help/hlpforma.htm)  
 * [Register for BLS API v 2.0](http://data.bls.gov/registrationEngine/)  
- 
+
+
