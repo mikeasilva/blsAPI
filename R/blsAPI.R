@@ -65,9 +65,18 @@ blsAPI <- function(payload=NA, api.version=1){
     api.url <- paste0('http://api.bls.gov/publicAPI/v',api.version,'/timeseries/data/')
     if(is.list(payload)){
       ## Multiple Series or One or More Series, Specifying Years request
+      payload <- toJSON(payload)
+      m <- regexpr('\\"seriesid\\":\\"[a-zA-Z0-9]*\\",', payload)
+      str <- regmatches(payload, m)
+      if(length(str)>0){
+        # wrap single series in []
+        replace <- sub(',', '],', sub(':', ':[',str))
+        payload <- sub(str, replace, payload)
+      }
+      
       curlPerform(url=api.url,
                 httpheader=c('Content-Type' = "application/json;"),
-                postfields=toJSON(payload),
+                postfields=payload,
                 verbose = FALSE, 
                 writefunction = h$update
       )
