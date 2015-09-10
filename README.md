@@ -18,7 +18,7 @@ install.packages('blsAPI')
 
 ```r
 library(devtools)
-install_github('blsAPI')
+install_github('mikeasilva/blsAPI')
 ```
 
 ### API Basics  
