@@ -1,6 +1,6 @@
 ## blsAPI.R
 #
-#' @title Request Data From The U.S. Bureau Of Labor Statistics API
+#' @title Request Data from the U.S. Bureau Of Labor Statistics API
 #' @description Allows users to request data for one or multiple series through the U.S. Bureau of Labor Statistics API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string or data frame.
 #' @details See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details on the payload.
 #' @param payload a string or a list containing data to be sent to the API.
@@ -18,7 +18,7 @@
 #' ## Single Series request
 #' response <- blsAPI('LAUCN040010000000005')
 #' json <- fromJSON(response)
-#' 
+#' \dontrun{
 #' ## Multiple Series
 #' payload <- list('seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'))
 #' response <- blsAPI(payload)
@@ -55,6 +55,7 @@
 #'   'registrationKey'='995f4e779f204473aa565256e8afe73e')
 #' response <- blsAPI(payload, 2)
 #' json <- fromJSON(response)
+#' }
 
 blsAPI <- function(payload=NA, api.version=1, return.data.frame=FALSE){
   h = basicTextGatherer()

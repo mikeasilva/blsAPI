@@ -2,7 +2,7 @@
 % Please edit documentation in R/blsAPI.R
 \name{blsAPI}
 \alias{blsAPI}
-\title{Request Data From The U.S. Bureau Of Labor Statistics API}
+\title{Request Data from the U.S. Bureau Of Labor Statistics API}
 \usage{
 blsAPI(payload = NA, api.version = 1, return.data.frame = FALSE)
 }
@@ -28,7 +28,7 @@ library(blsAPI)
 ## Single Series request
 response <- blsAPI('LAUCN040010000000005')
 json <- fromJSON(response)
-
+\dontrun{
 ## Multiple Series
 payload <- list('seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'))
 response <- blsAPI(payload)
@@ -46,13 +46,13 @@ json <- fromJSON(response)
 ## Single Series
 response <- blsAPI('LAUCN040010000000005', 2)
 json <- fromJSON(response)
+## Or request a data frame
+df <- blsAPI('LAUCN040010000000005', 2, TRUE)
 
 ## Multiple Series
 payload <- list('seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'))
 response <- blsAPI(payload, 2)
 json <- fromJSON(response)
-## Or request a data frame
-df <- blsAPI(payload, 2, TRUE)
 
 ## One or More Series with Optional Parameters
 payload <- list(
@@ -65,6 +65,7 @@ payload <- list(
   'registrationKey'='995f4e779f204473aa565256e8afe73e')
 response <- blsAPI(payload, 2)
 json <- fromJSON(response)
+}
 }
 \keyword{api}
 \keyword{bls}

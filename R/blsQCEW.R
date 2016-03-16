@@ -1,6 +1,6 @@
 ## blsQCEW.R
 #
-#' @title Request QCEW Data From The U.S. Bureau Of Labor Statistics Open Data Access
+#' @title Request QCEW Data from the U.S. Bureau Of Labor Statistics Open Data Access
 #' @description Allows users to request quarterly census of employment and wages (QCEW) data from the U.S. Bureau of Labor Statistics open access.  Users provide parameters and the function returns a data frame.  This function is based off of the sample code developed by the BLS that is found at \url{http://www.bls.gov/cew/doc/access/data_access_examples.htm}.
 #' @details This function is a wrapper for multiple data request methods.  See code examples for which parameters are required for which methods.  Visit \url{http://www.bls.gov/cew/opendata.htm} for an overview of the BLS's open data access.
 #' @param method a string describing which type of data you want requested.  Valid options are: Area, Industry and Size.  The method is not case sensitive.
@@ -11,6 +11,7 @@
 #' @param size a string for the size code. See \url{http://www.bls.gov/cew/doc/titles/size/size_titles.htm} for all establishment size classes and titles.  Note: Size data is only available for the first quarter of each year.
 #' @keywords bls economics
 #' @export blsQCEW
+#' @importFrom utils read.csv
 #' @examples
 #' ## These examples are taken from the sample code examples found at: 
 #' ## http://www.bls.gov/cew/doc/access/data_access_examples.htm
@@ -24,7 +25,7 @@
 #' 
 #' ## Example: Request the first quarter of 2013 for the state of Michigan
 #' MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
-#' 
+#' \dontrun{
 #' ## Industry Data Request
 #' 
 #' ## Required parameters are:
@@ -42,6 +43,7 @@
 #' ## Example: Request data for the first quarter of 2013 for establishments with 
 #' ## 100 to 249 employees
 #' SizeData <- blsQCEW('Size', year='2013', size='6')
+#' }
 
 blsQCEW <- function(method, year=NA, quarter=NA, area=NA, industry=NA, size=NA){
   ## This variable is changed in the case that an error has occured
