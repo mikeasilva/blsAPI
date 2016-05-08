@@ -5,7 +5,7 @@
 #' @details See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details on the payload.
 #' @param payload a string or a list containing data to be sent to the API.
 #' @param api.version an integer for which api version you want to use (i.e. 1 for v1, 2 for v2)
-#' @param return.data.frame a boolean if you want to the function to return JSON (default) or a data frame
+#' @param return.data.frame a boolean if you want to the function to return JSON (default) or a data frame. If the data frame option is used, the series id will be added as a column.  This is helpful if multiple series are selected.
 #' @keywords bls api economics
 #' @export blsAPI
 #' @import rjson RCurl
@@ -73,7 +73,7 @@ blsAPI <- function(payload=NA, api.version=1, return.data.frame=FALSE){
       m <- regexpr('\\"seriesid\\":\\"[a-zA-Z0-9]*\\",', payload)
       str <- regmatches(payload, m)
       if(length(str)>0){
-        # wrap single series in []
+        ## wrap single series in []
         replace <- sub(',', '],', sub(':', ':[',str))
         payload <- sub(str, replace, payload)
       }
@@ -86,15 +86,35 @@ blsAPI <- function(payload=NA, api.version=1, return.data.frame=FALSE){
     ## Return the results of the API call
     if(return.data.frame){
       json <-fromJSON(h$value())
-      df <- data.frame(year=character(), period=character(), periodName=character(), value=character(), stringsAsFactors=FALSE) 
-      i <- 0
-      for(d in json$Results$series[[1]]$data){
-        i <- i + 1
-        df[i,] <- unlist(d)
+      ## Iterate over the series
+      number.of.series = length(json$Results$series)
+      for(i in 1:number.of.series){
+        ## Set the default structure of the data frame
+        df.start <- data.frame(year=character(), period=character(), periodName=character(), value=character(), stringsAsFactors=FALSE)
+        j <- 0
+        for(d in json$Results$series[[1]]$data){
+          j <- j + 1
+          ## Remove the footnotes from the list to stop the warnings
+          d$footnotes <- NULL
+          ## Add record to the data frame
+          df.start[j,] <- unlist(d)
+        }
+        ## Add in the series id
+        df.start$seriesID = json$Results$series[[i]]$seriesID
+        ## Create the data frame that will be returned
+        if(!exists("df.to.return")){
+          ## Data frame to return not defined so create it
+          df.to.return = df.start
+        } 
+        else {
+          ## Append to the existing data frame
+          df.to.return <- rbind(df.to.return, df.start)
+        }
       }
-      return(df)
+      return(df.to.return)
     }
     else {
+      ## Return the JSON results
       return(h$value()) 
     }
   }
