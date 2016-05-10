@@ -9,15 +9,20 @@ blsAPI is an R package that allows users to request data for one or multiple ser
 
 Installation
 ============
-blsAPI can be installed easily through CRAN or GitHub.  Select which repository you would like to use and type the following commands in R:
+blsAPI can be installed easily through `CRAN <http://cran.r-project.org/web/packages/blsAPI/index.html>`_.
+or `GitHub 
+<https://github.com/mikeasilva/blsAPI>`_..  Select which repository you would like to use and type the following commands in R:
 
 CRAN
 ----
-``install.packages('blsAPI')``
+.. code:: r
+  install.packages('blsAPI')
 
 GitHub
 ------
-``library(devtools); install_github('mikeasilva/blsAPI')``
+.. code:: r
+  library(devtools)
+  install_github('mikeasilva/blsAPI')
 
 API Basics
 ==========
@@ -27,10 +32,10 @@ The blsAPI package supports two versions of the BLS API. API Version 2.0 require
 Service                                   Version 2.0 (Registered)  Version 1.0 (Unregistered)
 ========================================  ========================  ==========================
 Daily query limit	                        500	                      25
-Series per query limit	                  50                        25
+Series per query limit	                   50                        25
 Years per query limit                     20                        10
 Net/Percent Changes	                      Yes                       No
-Optional annual averages	                Yes                       No
-Series description information (catalog)	Yes                       No
+Optional annual averages	                 Yes                       No
+Series description information (catalog)	 Yes                       No
 ========================================  ========================  ==========================
 
