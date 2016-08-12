@@ -73,7 +73,7 @@ blsQCEW <- function(method, year=NA, quarter=NA, area=NA, industry=NA, size=NA){
     url <- sub("YEAR", year, url, ignore.case=FALSE)
   }
   if(class(quarter)!='logical'){
-    have.quarter
+    have.quarter = TRUE
     url <- sub("QTR", quarter, url, ignore.case=FALSE)
   }
   if(class(area)!='logical'){
