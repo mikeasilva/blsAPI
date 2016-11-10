@@ -18,14 +18,11 @@ install.packages('blsAPI')
 
 ```r
 library(devtools)
-install_github('blsAPI')
+install_github('mikeasilva/blsAPI')
 ```
 
 ### API Basics  
 The blsAPI package supports two versions of the BLS API.  API Version 2.0 requires registration and offers greater query limits. It also allows users to request net and percent changes and series description information. See below for more details.
-
-
-
 
 | Service                                  |  Version 2.0 (Registered)  |  Version 1.0 (Unregistered)  |
 |:-----------------------------------------|:--------------------------:|:----------------------------:|
@@ -141,6 +138,16 @@ ggplot(df) + geom_rect(aes(xmin = gr.start, xmax = gr.end, ymin = -Inf, ymax = I
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png) 
 
+## Quarterly Census of Employment and Wages (QCEW) Open Data
+The BLS has made QCEW data available through an open data access option.  This package can access this data.
+
+```r
+## Request the first quarter of 2013 for the state of Michigan
+MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
+```
+
+Please see the help file for more options and example code.
+
 ## Learning More
 With the basics described above you can get started with the BLS API right away. To learn more see:  
 
@@ -148,5 +155,3 @@ With the basics described above you can get started with the BLS API right away.
 * [BLS API FAQ](http://www.bls.gov/developers/api_faqs.htm) 
 * [BLS Help & Tutorials: Series ID Formats](http://www.bls.gov/help/hlpforma.htm)  
 * [Register for BLS API v 2.0](http://data.bls.gov/registrationEngine/)  
-
-
