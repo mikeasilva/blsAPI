@@ -6,7 +6,7 @@ blsAPI is an R package that allows users to request data for one or multiple ser
 ## Quick Tour 
 
 ### Installation  
-blsAPI can be installed easily through [CRAN](http://cran.r-project.org/web/packages/blsAPI/index.html) or [GitHub](https://github.com/mikeasilva/blsAPI).    
+blsAPI can be installed easily through [CRAN](https://cran.r-project.org/package=blsAPI) or [GitHub](https://github.com/mikeasilva/blsAPI).    
 
 #### CRAN  
 

@@ -92,7 +92,7 @@ blsAPI <- function(payload=NA, api.version=1, return.data.frame=FALSE){
         ## Set the default structure of the data frame
         df.start <- data.frame(year=character(), period=character(), periodName=character(), value=character(), stringsAsFactors=FALSE)
         j <- 0
-        for(d in json$Results$series[[1]]$data){
+        for(d in json$Results$series[[i]]$data){
           j <- j + 1
           ## Remove the footnotes from the list to stop the warnings
           d$footnotes <- NULL
@@ -108,7 +108,7 @@ blsAPI <- function(payload=NA, api.version=1, return.data.frame=FALSE){
         } 
         else {
           ## Append to the existing data frame
-          df.to.return <- rbind(df.to.return, df.start)
+          df.to.return <- rbind(df.start, df.to.return)
         }
       }
       return(df.to.return)

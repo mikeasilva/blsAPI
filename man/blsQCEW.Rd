@@ -45,7 +45,7 @@ MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
 ## Required parameters are:
 ##  * industry
 ##  * quarter
-##  * area
+##  * year
 
 ## Example: Request Construction data for the first quarter of 2013
 Construction <- blsQCEW('Industry', year='2013', quarter='1', industry='1012')
