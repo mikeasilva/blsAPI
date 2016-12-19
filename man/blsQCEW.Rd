@@ -14,21 +14,21 @@ blsQCEW(method, year = NA, quarter = NA, area = NA, industry = NA,
 
 \item{quarter}{a string indicating the quarter (1, 2, 3 or 4) or "a" for the annual average.}
 
-\item{area}{a string indicating which area you want the data for.  See \url{http://www.bls.gov/cew/doc/titles/area/area_titles.htm} for all area codes and titles.}
+\item{area}{a string indicating which area you want the data for.  See <\url{https://www.bls.gov/cew/doc/titles/area/area_titles.htm}> for all area codes and titles.}
 
-\item{industry}{a string for the NAICS code.  Some industry codes contain hyphens but the open data access uses underscores instead of hyphens. So 31-33 becomes 31_33. For all industry codes and titles see: \url{http://www.bls.gov/cew/doc/titles/industry/industry_titles.htm}}
+\item{industry}{a string for the NAICS code.  Some industry codes contain hyphens but the open data access uses underscores instead of hyphens. So 31-33 becomes 31_33. For all industry codes and titles see: <\url{https://www.bls.gov/cew/doc/titles/industry/industry_titles.htm}>}
 
-\item{size}{a string for the size code. See \url{http://www.bls.gov/cew/doc/titles/size/size_titles.htm} for all establishment size classes and titles.  Note: Size data is only available for the first quarter of each year.}
+\item{size}{a string for the size code. See <\url{https://www.bls.gov/cew/doc/titles/size/size_titles.htm}> for all establishment size classes and titles.  Note: Size data is only available for the first quarter of each year.}
 }
 \description{
-Allows users to request quarterly census of employment and wages (QCEW) data from the U.S. Bureau of Labor Statistics open access.  Users provide parameters and the function returns a data frame.  This function is based off of the sample code developed by the BLS that is found at \url{http://www.bls.gov/cew/doc/access/data_access_examples.htm}.
+Allows users to request quarterly census of employment and wages (QCEW) data from the U.S. Bureau of Labor Statistics open access.  Users provide parameters and the function returns a data frame.  This function is based off of the sample code developed by the BLS that is found at <\url{https://www.bls.gov/cew/doc/access/data_access_examples.htm}>.
 }
 \details{
-This function is a wrapper for multiple data request methods.  See code examples for which parameters are required for which methods.  Visit \url{http://www.bls.gov/cew/opendata.htm} for an overview of the BLS's open data access.
+This function is a wrapper for multiple data request methods.  See code examples for which parameters are required for which methods.  Visit <\url{https://www.bls.gov/cew/opendata.htm}> for an overview of the BLS's open data access.
 }
 \examples{
 ## These examples are taken from the sample code examples found at: 
-## http://www.bls.gov/cew/doc/access/data_access_examples.htm
+## <https://www.bls.gov/cew/doc/access/data_access_examples.htm>
 
 ## Area Data Request
 
