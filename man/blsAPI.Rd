@@ -14,13 +14,13 @@ blsAPI(payload = NA, api.version = 1, return.data.frame = FALSE)
 \item{return.data.frame}{a boolean if you want to the function to return JSON (default) or a data frame. If the data frame option is used, the series id will be added as a column.  This is helpful if multiple series are selected.}
 }
 \description{
-Allows users to request data for one or multiple series through the U.S. Bureau of Labor Statistics API.  Users provide parameters as specified in \url{http://www.bls.gov/developers/api_signature.htm} and the function returns a JSON string or data frame.
+Allows users to request data for one or multiple series through the U.S. Bureau of Labor Statistics API.  Users provide parameters as specified in <\url{https://www.bls.gov/developers/api_signature.htm}> and the function returns a JSON string or data frame.
 }
 \details{
-See \url{http://www.bls.gov/developers/} and \url{http://www.bls.gov/developers/api_signature.htm} for more details on the payload.
+See <\url{https://www.bls.gov/developers/}> and <\url{https://www.bls.gov/developers/api_signature.htm}> for more details on the payload.
 }
 \examples{
-## These examples are taken from http://www.bls.gov/developers/api_signature.htm
+## These examples are taken from <https://www.bls.gov/developers/api_signature.htm>
 library(rjson)
 library(blsAPI)
 
