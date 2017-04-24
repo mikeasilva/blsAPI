@@ -13,7 +13,7 @@
 #' ## These examples are taken from <https://www.bls.gov/developers/api_signature.htm>
 #' library(rjson)
 #' library(blsAPI)
-#' 
+#'
 #' ## API Version 1.0 R Script Sample Code
 #' ## Single Series request
 #' response <- blsAPI('LAUCN040010000000005')
@@ -23,7 +23,7 @@
 #' payload <- list('seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'))
 #' response <- blsAPI(payload)
 #' json <- fromJSON(response)
-#' 
+#'
 #' ## One or More Series, Specifying Years
 #' payload <- list(
 #'   'seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'),
@@ -31,19 +31,19 @@
 #'   'endyear'=2012)
 #' response <- blsAPI(payload)
 #' json <- fromJSON(response)
-#' 
+#'
 #' ## API Version 2.0 R Script Sample Code
 #' ## Single Series
 #' response <- blsAPI('LAUCN040010000000005', 2)
 #' json <- fromJSON(response)
 #' ## Or request a data frame
 #' df <- blsAPI('LAUCN040010000000005', 2, TRUE)
-#' 
+#'
 #' ## Multiple Series
 #' payload <- list('seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'))
 #' response <- blsAPI(payload, 2)
 #' json <- fromJSON(response)
-#' 
+#'
 #' ## One or More Series with Optional Parameters
 #' payload <- list(
 #'   'seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'),
@@ -66,7 +66,7 @@ blsAPI <- function(payload=NA, api.version=1, return.data.frame=FALSE){
   }
   else{
     ## Payload specified so make the request
-    api.url <- paste0('https://api.bls.gov/publicAPI/v',api.version,'/timeseries/data/')
+    api_url <- paste0('https://api.bls.gov/publicAPI/v',api.version,'/timeseries/data/')
     if(is.list(payload)){
       ## Multiple Series or One or More Series, Specifying Years request
       payload <- toJSON(payload)
@@ -77,45 +77,53 @@ blsAPI <- function(payload=NA, api.version=1, return.data.frame=FALSE){
         replace <- sub(',', '],', sub(':', ':[',str))
         payload <- sub(str, replace, payload)
       }
-      curlPerform(url=api.url, httpheader=c('Content-Type' = "application/json;"), postfields=payload, verbose = FALSE, writefunction = h$update)
+      curlPerform(url=api_url, httpheader=c('Content-Type' = "application/json;"), postfields=payload, verbose = FALSE, writefunction = h$update)
     }
     else{
       ## Single Series request
-      curlPerform(url=paste0(api.url,payload), verbose = FALSE, writefunction = h$update)
+      curlPerform(url=paste0(api_url,payload), verbose = FALSE, writefunction = h$update)
     }
     ## Return the results of the API call
     if(return.data.frame){
       json <-fromJSON(h$value())
+      if (json$status != 'REQUEST_SUCCEEDED') {
+				stop(paste('blsAPI call failed', paste(json$message, collapse = ';'), sep=":"))
+			}
       ## Iterate over the series
-      number.of.series = length(json$Results$series)
-      for(i in 1:number.of.series){
+      number_of_series = length(json$Results$series)
+      for(i in 1:number_of_series){
         ## Set the default structure of the data frame
-        df.start <- data.frame(year=character(), period=character(), periodName=character(), value=character(), stringsAsFactors=FALSE)
-        j <- 0
-        for(d in json$Results$series[[i]]$data){
-          j <- j + 1
-          ## Remove the footnotes from the list to stop the warnings
-          d$footnotes <- NULL
-          ## Add record to the data frame
-          df.start[j,] <- unlist(d)
+        df_start <- data.frame(year=character(), period=character(), periodName=character(), value=character(), stringsAsFactors=FALSE)
+        ## Get the data
+        series_data <- json$Results$series[[i]]$data
+        ## Can get no data after a successful request
+        if (length(series_data) > 0) {
+          j <- 0
+          for (d in series_data) {
+            j <- j + 1
+            ## Remove the footnotes from the list to stop the warnings
+            d$footnotes <- NULL
+            ## Add record to the data frame
+            df_start[j,] <- unlist(d)
+            ## Add in the series id
+            df_start$seriesID = json$Results$series[[i]]$seriesID
+          }
         }
-        ## Add in the series id
-        df.start$seriesID = json$Results$series[[i]]$seriesID
         ## Create the data frame that will be returned
-        if(!exists("df.to.return")){
+        if(!exists("df_to_return")){
           ## Data frame to return not defined so create it
-          df.to.return = df.start
-        } 
+          df_to_return = df_start
+        }
         else {
           ## Append to the existing data frame
-          df.to.return <- rbind(df.start, df.to.return)
+          df_to_return <- rbind(df_start, df_to_return)
         }
       }
-      return(df.to.return)
+      return(df_to_return)
     }
     else {
       ## Return the JSON results
-      return(h$value()) 
+      return(h$value())
     }
   }
 }
