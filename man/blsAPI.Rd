@@ -70,4 +70,3 @@ json <- fromJSON(response)
 \keyword{api}
 \keyword{bls}
 \keyword{economics}
-
