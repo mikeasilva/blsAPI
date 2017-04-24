@@ -47,10 +47,10 @@
 
 blsQCEW <- function(method, year=NA, quarter=NA, area=NA, industry=NA, size=NA){
   ## This variable is changed in the case that an error has occured
-  request.data = TRUE
+  request_data = TRUE
   
   ## These variables are used to check that we have all needed parameters
-  have.year = have.quarter = have.area = have.industry = have.size = FALSE
+  have_year = have_quarter = have_area = have_industry = have_size = FALSE
   
   ## Fix case sensitivity of the method parameter
   method = tolower(method)
@@ -64,44 +64,44 @@ blsQCEW <- function(method, year=NA, quarter=NA, area=NA, industry=NA, size=NA){
     url <- "https://www.bls.gov/cew/data/api/YEAR/1/size/SIZE.csv"
   } else {
     message('blsQCEW: Method not valid.  Please use "Area", "Industry" or "Size".')
-    request.data = FALSE
+    request_data = FALSE
   }
   
   # Update the URL with the parameters
   if(class(year)!='logical'){
-    have.year = TRUE
+    have_year = TRUE
     url <- sub("YEAR", year, url, ignore.case=FALSE)
   }
   if(class(quarter)!='logical'){
-    have.quarter = TRUE
+    have_quarter = TRUE
     url <- sub("QTR", quarter, url, ignore.case=FALSE)
   }
   if(class(area)!='logical'){
-    have.area = TRUE
+    have_area = TRUE
     url <- sub("AREA", area, url, ignore.case=FALSE)
   }
   if(class(industry)!='logical'){
-    have.industry = TRUE
+    have_industry = TRUE
     url <- sub("INDUSTRY", industry, url, ignore.case=FALSE)
   }
   if(class(size)!='logical'){
-    have.size = TRUE
+    have_size = TRUE
     url <- sub("SIZE", size, url, ignore.case=FALSE)
   }
   
   ## Check to make sure we have all the parameters we need
-  if(method == 'area' && (!have.area || !have.year || !have.quarter)){
-    request.data = FALSE
+  if(method == 'area' && (!have_area || !have_year || !have_quarter)){
+    request_data = FALSE
     message('blsQCEW: Missing parameter for area request.  The area, year and quarter parameters are needed.')
-  } else if(method == 'industry' && (!have.industry || !have.year || !have.quarter)){
-    request.data = FALSE
+  } else if(method == 'industry' && (!have_industry || !have_year || !have_quarter)){
+    request_data = FALSE
     message('blsQCEW: Missing parameter for industry request.  The industry, year and quarter parameters are needed.')
-  } else if(method == 'size' && {!have.size || !have.year}){
-    request.data = FALSE
+  } else if(method == 'size' && {!have_size || !have_year}){
+    request_data = FALSE
     message('blsQCEW: Missing parameter for size request.  The size and year parameters are needed.')
   } 
   
-  if(request.data){
+  if(request_data){
     ##  Return the data frame
     read.csv(url, header = TRUE, sep = ",", quote="\"", dec=".", na.strings=" ", skip=0)
   }
