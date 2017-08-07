@@ -61,4 +61,3 @@ SizeData <- blsQCEW('Size', year='2013', size='6')
 }
 \keyword{bls}
 \keyword{economics}
-
