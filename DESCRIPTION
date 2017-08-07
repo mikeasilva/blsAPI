@@ -1,5 +1,5 @@
 Package: blsAPI
-Version: 0.1.8
+Version: 0.1.9
 Title: Request Data from the U.S. Bureau of Labor Statistics API
 Author: Michael Silva <mike.a.silva@gmail.com>
 Maintainer: Michael Silva <mike.a.silva@gmail.com>
