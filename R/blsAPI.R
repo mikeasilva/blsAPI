@@ -105,9 +105,9 @@ blsAPI <- function(payload=NA, api.version=1, return.data.frame=FALSE){
             d$footnotes <- NULL
             ## Add record to the data frame
             df_start[j,] <- unlist(d)
-            ## Add in the series id
-            df_start$seriesID = json$Results$series[[i]]$seriesID
           }
+          ## Add in the series id
+          df_start$seriesID = json$Results$series[[i]]$seriesID
         }
         ## Create the data frame that will be returned
         if(!exists("df_to_return")){
