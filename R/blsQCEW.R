@@ -1,4 +1,4 @@
-## blsQCEW.R
+# blsQCEW.R
 #
 #' @title Request QCEW Data from the U.S. Bureau Of Labor Statistics Open Data Access
 #' @description Allows users to request quarterly census of employment and wages (QCEW) data from the U.S. Bureau of Labor Statistics open access.  Users provide parameters and the function returns a data frame.  This function is based off of the sample code developed by the BLS that is found at <\url{https://www.bls.gov/cew/doc/access/data_access_examples.htm}>.
@@ -13,96 +13,91 @@
 #' @export blsQCEW
 #' @importFrom utils read.csv
 #' @examples
-#' ## These examples are taken from the sample code examples found at: 
-#' ## <https://www.bls.gov/cew/doc/access/data_access_examples.htm>
+#' # These examples are taken from the sample code examples found at: 
+#' # <https://www.bls.gov/cew/doc/access/data_access_examples.htm>
 #' 
-#' ## Area Data Request
+#' # Area Data Request
 #' 
-#' ## Required parameters are:
-#' ##  * year
-#' ##  * quarter
-#' ##  * area
+#' # Required parameters are:
+#' #  * year
+#' #  * quarter
+#' #  * area
 #' 
-#' ## Example: Request the first quarter of 2013 for the state of Michigan
+#' # Example: Request the first quarter of 2013 for the state of Michigan
 #' MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
 #' \dontrun{
-#' ## Industry Data Request
+#' # Industry Data Request
 #' 
-#' ## Required parameters are:
-#' ##  * industry
-#' ##  * quarter
-#' ##  * year
+#' # Required parameters are:
+#' #  * industry
+#' #  * quarter
+#' #  * year
 #' 
-#' ## Example: Request Construction data for the first quarter of 2013
+#' # Example: Request Construction data for the first quarter of 2013
 #' Construction <- blsQCEW('Industry', year='2013', quarter='1', industry='1012')
 #' 
-#' ## Size Data Request
-#' ##  * size
-#' ##  * year
+#' # Size Data Request
+#' #  * size
+#' #  * year
 #' 
-#' ## Example: Request data for the first quarter of 2013 for establishments with 
-#' ## 100 to 249 employees
+#' # Example: Request data for the first quarter of 2013 for establishments with 
+#' # 100 to 249 employees
 #' SizeData <- blsQCEW('Size', year='2013', size='6')
 #' }
 
 blsQCEW <- function(method, year=NA, quarter=NA, area=NA, industry=NA, size=NA){
-  ## This variable is changed in the case that an error has occured
-  request_data = TRUE
-  
-  ## These variables are used to check that we have all needed parameters
-  have_year = have_quarter = have_area = have_industry = have_size = FALSE
-  
-  ## Fix case sensitivity of the method parameter
-  method = tolower(method)
-  
+  # This variable is changed in the case that an error has occured
+  request_data <- TRUE
+  # These variables are used to check that we have all needed parameters
+  have_year <- have_quarter <- have_area <- have_industry <- have_size <- FALSE
+  # Fix case sensitivity of the method parameter
+  method <- tolower(method)
   # Get the open data url
-  if(method == 'area'){
+  if (method == "area"){
     url <- "https://www.bls.gov/cew/data/api/YEAR/QTR/area/AREA.csv"
-  } else if(method == 'industry'){
+  } else if (method == "industry"){
     url <- "https://www.bls.gov/cew/data/api/YEAR/QTR/industry/INDUSTRY.csv"
-  } else if(method == 'size'){
+  } else if (method == "size"){
     url <- "https://www.bls.gov/cew/data/api/YEAR/1/size/SIZE.csv"
   } else {
     message('blsQCEW: Method not valid.  Please use "Area", "Industry" or "Size".')
-    request_data = FALSE
+    request_data <- FALSE
   }
-  
   # Update the URL with the parameters
-  if(class(year)!='logical'){
-    have_year = TRUE
-    url <- sub("YEAR", year, url, ignore.case=FALSE)
+  if (class(year) != "logical"){
+    have_year <- TRUE
+    url <- sub("YEAR", year, url, ignore.case = FALSE)
   }
-  if(class(quarter)!='logical'){
-    have_quarter = TRUE
-    url <- sub("QTR", quarter, url, ignore.case=FALSE)
+  if (class(quarter) != "logical"){
+    have_quarter <- TRUE
+    url <- sub("QTR", quarter, url, ignore.case = FALSE)
   }
-  if(class(area)!='logical'){
-    have_area = TRUE
-    url <- sub("AREA", area, url, ignore.case=FALSE)
+  if (class(area) != "logical"){
+    have_area <- TRUE
+    url <- sub("AREA", area, url, ignore.case = FALSE)
   }
-  if(class(industry)!='logical'){
-    have_industry = TRUE
-    url <- sub("INDUSTRY", industry, url, ignore.case=FALSE)
+  if (class(industry) != "logical"){
+    have_industry <- TRUE
+    url <- sub("INDUSTRY", industry, url, ignore.case = FALSE)
   }
-  if(class(size)!='logical'){
-    have_size = TRUE
+  if (class(size) != "logical"){
+    have_size <- TRUE
     url <- sub("SIZE", size, url, ignore.case=FALSE)
   }
-  
-  ## Check to make sure we have all the parameters we need
-  if(method == 'area' && (!have_area || !have_year || !have_quarter)){
-    request_data = FALSE
+  # Check to make sure we have all the parameters we need
+  if (method == "area" && (!have_area || !have_year || !have_quarter)){
+    request_data <- FALSE
     message('blsQCEW: Missing parameter for area request.  The area, year and quarter parameters are needed.')
-  } else if(method == 'industry' && (!have_industry || !have_year || !have_quarter)){
-    request_data = FALSE
+  } else if (method == "industry" && (!have_industry || !have_year || !have_quarter)){
+    request_data <- FALSE
     message('blsQCEW: Missing parameter for industry request.  The industry, year and quarter parameters are needed.')
-  } else if(method == 'size' && {!have_size || !have_year}){
-    request_data = FALSE
+  } else if (method == "size" && (!have_size || !have_year)){
+    request_data <- FALSE
     message('blsQCEW: Missing parameter for size request.  The size and year parameters are needed.')
-  } 
-  
-  if(request_data){
-    ##  Return the data frame
-    read.csv(url, header = TRUE, sep = ",", quote="\"", dec=".", na.strings=" ", skip=0)
+  }
+  if (request_data){
+    #  Return the data frame
+    read.csv(url, header <- TRUE, sep <- ",", quote="\"", dec=".",
+             na.strings=" ", skip=0)
   }
 }
