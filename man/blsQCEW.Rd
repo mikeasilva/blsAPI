@@ -27,35 +27,35 @@ Allows users to request quarterly census of employment and wages (QCEW) data fro
 This function is a wrapper for multiple data request methods.  See code examples for which parameters are required for which methods.  Visit <\url{https://www.bls.gov/cew/opendata.htm}> for an overview of the BLS's open data access.
 }
 \examples{
-## These examples are taken from the sample code examples found at: 
-## <https://www.bls.gov/cew/doc/access/data_access_examples.htm>
+# These examples are taken from the sample code examples found at: 
+# <https://www.bls.gov/cew/doc/access/data_access_examples.htm>
 
-## Area Data Request
+# Area Data Request
 
-## Required parameters are:
-##  * year
-##  * quarter
-##  * area
+# Required parameters are:
+#  * year
+#  * quarter
+#  * area
 
-## Example: Request the first quarter of 2013 for the state of Michigan
+# Example: Request the first quarter of 2013 for the state of Michigan
 MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
 \dontrun{
-## Industry Data Request
+# Industry Data Request
 
-## Required parameters are:
-##  * industry
-##  * quarter
-##  * year
+# Required parameters are:
+#  * industry
+#  * quarter
+#  * year
 
-## Example: Request Construction data for the first quarter of 2013
+# Example: Request Construction data for the first quarter of 2013
 Construction <- blsQCEW('Industry', year='2013', quarter='1', industry='1012')
 
-## Size Data Request
-##  * size
-##  * year
+# Size Data Request
+#  * size
+#  * year
 
-## Example: Request data for the first quarter of 2013 for establishments with 
-## 100 to 249 employees
+# Example: Request data for the first quarter of 2013 for establishments with 
+# 100 to 249 employees
 SizeData <- blsQCEW('Size', year='2013', size='6')
 }
 }
