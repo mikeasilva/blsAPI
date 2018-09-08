@@ -37,8 +37,8 @@ This function is a wrapper for multiple data request methods.  See code examples
 #  * quarter
 #  * area
 
-# Example: Request the first quarter of 2013 for the state of Michigan
-MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
+# Example: Request the first quarter of 2017 for the state of Michigan
+MichiganData <- blsQCEW('Area', year='2017', quarter='1', area='26000')
 \dontrun{
 # Industry Data Request
 
@@ -47,16 +47,16 @@ MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
 #  * quarter
 #  * year
 
-# Example: Request Construction data for the first quarter of 2013
-Construction <- blsQCEW('Industry', year='2013', quarter='1', industry='1012')
+# Example: Request Construction data for the first quarter of 2017
+Construction <- blsQCEW('Industry', year='2017', quarter='1', industry='1012')
 
 # Size Data Request
 #  * size
 #  * year
 
-# Example: Request data for the first quarter of 2013 for establishments with 
+# Example: Request data for the first quarter of 2017 for establishments with 
 # 100 to 249 employees
-SizeData <- blsQCEW('Size', year='2013', size='6')
+SizeData <- blsQCEW('Size', year='2017', size='6')
 }
 }
 \keyword{bls}
