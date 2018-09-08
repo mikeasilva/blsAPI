@@ -131,7 +131,7 @@ blsAPI <- function(payload=NA, api_version=1, return_data_frame=FALSE){
         }
         else {
           # Append to the existing data frame
-          df_to_return <- rbind(df_start, df_to_return)
+          df_to_return <- rbind(df_to_return, df_start)
         }
       }
       return(df_to_return)
