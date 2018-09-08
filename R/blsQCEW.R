@@ -13,34 +13,34 @@
 #' @export blsQCEW
 #' @importFrom utils read.csv
 #' @examples
-#' # These examples are taken from the sample code examples found at: 
+#' # These examples are taken from the sample code examples found at:
 #' # <https://www.bls.gov/cew/doc/access/data_access_examples.htm>
-#' 
+#'
 #' # Area Data Request
-#' 
+#'
 #' # Required parameters are:
 #' #  * year
 #' #  * quarter
 #' #  * area
-#' 
+#'
 #' # Example: Request the first quarter of 2013 for the state of Michigan
 #' MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
 #' \dontrun{
 #' # Industry Data Request
-#' 
+#'
 #' # Required parameters are:
 #' #  * industry
 #' #  * quarter
 #' #  * year
-#' 
+#'
 #' # Example: Request Construction data for the first quarter of 2013
 #' Construction <- blsQCEW('Industry', year='2013', quarter='1', industry='1012')
-#' 
+#'
 #' # Size Data Request
 #' #  * size
 #' #  * year
-#' 
-#' # Example: Request data for the first quarter of 2013 for establishments with 
+#'
+#' # Example: Request data for the first quarter of 2013 for establishments with
 #' # 100 to 249 employees
 #' SizeData <- blsQCEW('Size', year='2013', size='6')
 #' }
@@ -53,11 +53,19 @@ blsQCEW <- function(method, year=NA, quarter=NA, area=NA, industry=NA, size=NA){
   # Fix case sensitivity of the method parameter
   method <- tolower(method)
   # Get the open data url
+<<<<<<< HEAD
   if (method == "area"){
     url <- "https://www.bls.gov/cew/data/api/YEAR/QTR/area/AREA.csv"
   } else if (method == "industry"){
     url <- "https://www.bls.gov/cew/data/api/YEAR/QTR/industry/INDUSTRY.csv"
   } else if (method == "size"){
+=======
+  if(method == 'area'){
+    url <- "https://www.bls.gov/cew/data/api/YEAR/QTR/area/AREA.csv"
+  } else if(method == 'industry'){
+    url <- "https://www.bls.gov/cew/data/api/YEAR/QTR/industry/INDUSTRY.csv"
+  } else if(method == 'size'){
+>>>>>>> develop
     url <- "https://www.bls.gov/cew/data/api/YEAR/1/size/SIZE.csv"
   } else {
     message('blsQCEW: Method not valid.  Please use "Area", "Industry" or "Size".')
