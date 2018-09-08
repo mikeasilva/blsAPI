@@ -23,8 +23,8 @@
 #' #  * quarter
 #' #  * area
 #' 
-#' # Example: Request the first quarter of 2013 for the state of Michigan
-#' MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
+#' # Example: Request the first quarter of 2017 for the state of Michigan
+#' MichiganData <- blsQCEW('Area', year='2017', quarter='1', area='26000')
 #' \dontrun{
 #' # Industry Data Request
 #' 
@@ -33,16 +33,16 @@
 #' #  * quarter
 #' #  * year
 #' 
-#' # Example: Request Construction data for the first quarter of 2013
-#' Construction <- blsQCEW('Industry', year='2013', quarter='1', industry='1012')
+#' # Example: Request Construction data for the first quarter of 2017
+#' Construction <- blsQCEW('Industry', year='2017', quarter='1', industry='1012')
 #' 
 #' # Size Data Request
 #' #  * size
 #' #  * year
 #' 
-#' # Example: Request data for the first quarter of 2013 for establishments with 
+#' # Example: Request data for the first quarter of 2017 for establishments with 
 #' # 100 to 249 employees
-#' SizeData <- blsQCEW('Size', year='2013', size='6')
+#' SizeData <- blsQCEW('Size', year='2017', size='6')
 #' }
 
 blsQCEW <- function(method, year=NA, quarter=NA, area=NA, industry=NA, size=NA){
@@ -54,11 +54,11 @@ blsQCEW <- function(method, year=NA, quarter=NA, area=NA, industry=NA, size=NA){
   method <- tolower(method)
   # Get the open data url
   if (method == "area"){
-    url <- "https://www.bls.gov/cew/data/api/YEAR/QTR/area/AREA.csv"
+    url <- "https://data.bls.gov/cew/data/api/YEAR/QTR/area/AREA.csv"
   } else if (method == "industry"){
-    url <- "https://www.bls.gov/cew/data/api/YEAR/QTR/industry/INDUSTRY.csv"
+    url <- "https://data.bls.gov/cew/data/api/YEAR/QTR/industry/INDUSTRY.csv"
   } else if (method == "size"){
-    url <- "https://www.bls.gov/cew/data/api/YEAR/1/size/SIZE.csv"
+    url <- "https://data.bls.gov/cew/data/api/YEAR/1/size/SIZE.csv"
   } else {
     message('blsQCEW: Method not valid.  Please use "Area", "Industry" or "Size".')
     request_data <- FALSE
