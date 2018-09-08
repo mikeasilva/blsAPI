@@ -142,8 +142,8 @@ ggplot(df) + geom_rect(aes(xmin = gr.start, xmax = gr.end, ymin = -Inf, ymax = I
 The BLS has made QCEW data available through an open data access option.  This package can access this data.
 
 ```r
-## Request the first quarter of 2013 for the state of Michigan
-MichiganData <- blsQCEW('Area', year='2013', quarter='1', area='26000')
+## Request the first quarter of 2017 for the state of Michigan
+MichiganData <- blsQCEW('Area', year='2017', quarter='1', area='26000')
 ```
 
 Please see the help file for more options and example code.
