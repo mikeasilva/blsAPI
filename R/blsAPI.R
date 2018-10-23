@@ -77,15 +77,18 @@ blsAPI <- function(payload=NA, api_version=1, return_data_frame=FALSE){
         replace <- sub(",", "],", sub(":", ":[", str))
         payload <- sub(str, replace, payload)
       }
-      response <- POST(url = api_url, body = payload, encode = "json")
+      response <- httr::POST(url = api_url, body = payload, encode = "json")
     }
     else{
       # Single Series request
-      response <- GET(url = paste0(api_url, payload))
+      response <- httr::GET(url = paste0(api_url, payload))
     }
+    
+    json <- content(response, as = "text", encoding = "UTF-8")
+    
     # Return the results of the API call
     if (return_data_frame){
-      json <- fromJSON(content(response, as = "text"))
+      json <- fromJSON(json)
       if (json$status != "REQUEST_SUCCEEDED") {
 				stop(paste("blsAPI call failed",
 				           paste(json$message, collapse = ";"),
@@ -130,7 +133,7 @@ blsAPI <- function(payload=NA, api_version=1, return_data_frame=FALSE){
     }
     else {
       # Return the JSON results
-      return(h$value())
+      return(json)
     }
   }
 }
