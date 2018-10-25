@@ -8,7 +8,7 @@
 #' @param return_data_frame a boolean if you want to the function to return JSON (default) or a data frame. If the data frame option is used, the series id will be added as a column.  This is helpful if multiple series are selected.
 #' @keywords bls api economics
 #' @export blsAPI
-#' @import rjson httr
+#' @import httr rjson
 #' @examples
 #' # These examples are taken from <https://www.bls.gov/developers/api_signature.htm>
 #' library(rjson)
@@ -77,18 +77,17 @@ blsAPI <- function(payload=NA, api_version=1, return_data_frame=FALSE){
         replace <- sub(",", "],", sub(":", ":[", str))
         payload <- sub(str, replace, payload)
       }
-      response <- httr::POST(url = api_url, body = payload, encode = "json")
+      response <- httr::POST(url = api_url, body = payload, httr::content_type_json())
     }
     else{
       # Single Series request
       response <- httr::GET(url = paste0(api_url, payload))
     }
     
-    json <- content(response, as = "text", encoding = "UTF-8")
     
     # Return the results of the API call
     if (return_data_frame){
-      json <- fromJSON(json)
+      json <- fromJSON(rawToChar(response$content))
       if (json$status != "REQUEST_SUCCEEDED") {
 				stop(paste("blsAPI call failed",
 				           paste(json$message, collapse = ";"),
@@ -133,7 +132,7 @@ blsAPI <- function(payload=NA, api_version=1, return_data_frame=FALSE){
     }
     else {
       # Return the JSON results
-      return(json)
+      return(rawToChar(response$content))
     }
   }
 }

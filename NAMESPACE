@@ -2,5 +2,6 @@
 
 export(blsAPI)
 export(blsQCEW)
-import(rjson, httr)
+import(httr)
+import(rjson)
 importFrom(utils,read.csv)
