@@ -84,11 +84,10 @@ blsAPI <- function(payload=NA, api_version=1, return_data_frame=FALSE){
       response <- httr::GET(url = paste0(api_url, payload))
     }
     
-    json <- fromJSON(rawToChar(response$content))
     
     # Return the results of the API call
     if (return_data_frame){
-      json <- fromJSON(json)
+      json <- fromJSON(rawToChar(response$content))
       if (json$status != "REQUEST_SUCCEEDED") {
 				stop(paste("blsAPI call failed",
 				           paste(json$message, collapse = ";"),
