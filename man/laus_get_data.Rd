@@ -14,17 +14,17 @@ laus_get_data(
 )
 }
 \arguments{
-\item{location.vector}{}
+\item{location.vector}{A string or list of the different cities, states or metropolitan statistical areas you want LAUS data from}
 
-\item{measure.vector}{}
+\item{measure.vector}{A string of the laus measure you want to gather in your call, e.g. unemployment, unemployment rate.}
 
-\item{start.year}{}
+\item{start.year}{The year you want as the beginning period of data collection}
 
-\item{end.year}{}
+\item{end.year}{The year you want as the ending period of data collection}
 
-\item{api.version}{}
+\item{api.version}{A numerical value that specifies which version of the api you're using (1 or 2)}
 
-\item{bls.key}{}
+\item{bls.key}{The BLS key you're using to retrive data using version 2}
 }
 \description{
 Allows users to request LAUS data and have it downloaded as a data frame with ease

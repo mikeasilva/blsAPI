@@ -2,12 +2,12 @@
 #
 #' @title A wrapper function for blsAPI.R function that processes gathered Labor Are Unemployment Statistics (LAUS) data into a data frame
 #' @description Allows users to request LAUS data and have it downloaded as a data frame with ease
-#' @param location.vector 
-#' @param measure.vector 
-#' @param start.year 
-#' @param end.year 
-#' @param api.version 
-#' @param bls.key 
+#' @param location.vector A string or list of the different cities, states or metropolitan statistical areas you want LAUS data from
+#' @param measure.vector  A string of the laus measure you want to gather in your call, e.g. unemployment, unemployment rate.
+#' @param start.year The year you want as the beginning period of data collection
+#' @param end.year The year you want as the ending period of data collection
+#' @param api.version A numerical value that specifies which version of the api you're using (1 or 2)
+#' @param bls.key The BLS key you're using to retrive data using version 2
 #' @export laus_get_data
 #' @import dplyr rjson 
 #' @examples
@@ -43,7 +43,7 @@ laus_get_data <- function(location.vector, measure.vector, start.year, end.year,
   response <- blsAPI(payload, api_version = api.version)
   json <- fromJSON(response)
   return
-  }else if(api.version==2 & bls.key!=NULL){
+  }else if(api.version==2){
     payload <- list(
       'seriesid'=c(location_vec),
       'startyear'=start.year,

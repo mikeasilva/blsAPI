@@ -7,7 +7,7 @@
 laus_get_areacode(Location_Name)
 }
 \arguments{
-\item{Location_Name}{a string or a list containing the state name, city and state name, or the metripolitian statistical area name and state}
+\item{Location_Name}{A string or list of the different cities, states or metropolitan statistical areas you want LAUS data from}
 }
 \value{
 returns a string or list representing area codes
