@@ -3,6 +3,7 @@
 export(apiDF)
 export(blsAPI)
 export(blsQCEW)
+export(help_laus_areacodes)
 export(laus_get_areacode)
 export(laus_get_data)
 export(laus_get_measure)

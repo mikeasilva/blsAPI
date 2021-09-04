@@ -2,10 +2,10 @@
 #
 #' @title Acquire the area code used in the series id for observations in Labor Area Unemployment Statistics (LAUS) data
 #' @description Gathers the area code used in the laus_get_data function to acquire a data frame using the blsAPI function that request data through the U.S. Bureau of Labor Statistics API. The laus_get_areacode function is called by the laus_get_data function not the user.
-#' @param Location_Name A string or list of the different cities, states or metropolitan statistical areas you want LAUS data from
-#' @details See <\url{https://download.bls.gov/pub/time.series/la/la.area}> to see the format of the strings used in the measure param found in the area_text column
+#' @param Location_Name A string or vector of the different cities, states or metropolitan statistical areas you want LAUS data from
+#' @details type help_laus_areacodes() to get a list of all of the area names that area associated to an area code in the LAUS data
 #' @export laus_get_areacode
-#' @return returns a string or list representing area codes
+#' @return returns a string or vector representing area codes
 #' @examples
 #' library(blsAPI)
 #' laus_get_areacode(Location_Name = c("Florida", "California", 
