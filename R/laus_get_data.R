@@ -2,12 +2,12 @@
 #
 #' @title A wrapper function for blsAPI.R function that processes gathered Labor Are Unemployment Statistics (LAUS) data into a data frame
 #' @description Allows users to request LAUS data and have it downloaded as a data frame with ease
-#' @param location.vector A string or list of the different cities, states or metropolitan statistical areas you want LAUS data from
+#' @param location.vector A string or vector of the different cities, states or metropolitan statistical areas you want LAUS data from
 #' @param measure.vector  A string of the laus measure you want to gather in your call, e.g. unemployment, unemployment rate.
 #' @param start.year The year you want as the beginning period of data collection
 #' @param end.year The year you want as the ending period of data collection
-#' @param api.version A numerical value that specifies which version of the api you're using (1 or 2)
-#' @param bls.key The BLS key you're using to retrive data using version 2
+#' @param api.version A numerical value that specifies which version of the api you're using (1 or 2). Default is version 1.
+#' @param bls.key The BLS key you're using to retrieve data using version 2
 #' @export laus_get_data
 #' @import dplyr rjson 
 #' @examples
@@ -28,13 +28,14 @@ laus_get_data <- function(location.vector, measure.vector, start.year, end.year,
   # Saves the measure code to a vector for later use
   Measure_Code <- laus_get_measure(measure = measure.vector)
   
-  # Initializes a blank character vector that has the series id for the LAUS data for each location
+  # Initializes a blank character vector that will house the Series IDs for the LAUS data for each location and for one specified measure
   location_vec <- character()
-  
+  # For loop that creates a Series ID for each location based on the measure selected
   for (i in SeriesID){
     location_vec <- c(location_vec, paste("LAU",i, Measure_Code, sep=""))
   }
   
+  # An if statement to ascertain which version of the API is used then creates the correct payload
   if (api.version==1){
   payload <- list(
     'seriesid'=c(location_vec),
@@ -53,6 +54,8 @@ laus_get_data <- function(location.vector, measure.vector, start.year, end.year,
     json <- fromJSON(response)
   }
   
+  # Creates an empty data frame with specified columns 
+  # Used later in the next for loop to house data for each area 
   df = data.frame(
     year = character(),
     period = character(),
@@ -61,8 +64,9 @@ laus_get_data <- function(location.vector, measure.vector, start.year, end.year,
     Location = character()
   )
   
-  
+  # 
   n = 1
+  # For loop that takes the data for each area and adds its rows to the df specified above
   for (i in location.vector){
     temp <- apiDF(json$Results$series[[n]]$data)
     temp$Location <- i
@@ -71,7 +75,7 @@ laus_get_data <- function(location.vector, measure.vector, start.year, end.year,
     n = n +1
   }
   
-  # If Else Statements to Rename the Value Column
+  # If else statements to rename the value column based on the measure used
   if(Measure_Code == "03"){
     df <- dplyr::rename(df, Unemployment_Rate = value)
   }else if(Measure_Code == "04"){
