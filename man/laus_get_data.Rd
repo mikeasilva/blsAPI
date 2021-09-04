@@ -14,7 +14,7 @@ laus_get_data(
 )
 }
 \arguments{
-\item{location.vector}{A string or vector of the different cities, states or metropolitan statistical areas you want LAUS data from}
+\item{location.vector}{A string or vector of the different cities, states or metropolitan statistical areas you want LAUS data from. To get help type help_laus_areacodes() to get a list of all of the area names that area associated to an area code in the LAUS data}
 
 \item{measure.vector}{A string of the laus measure you want to gather in your call, e.g. unemployment, unemployment rate.}
 
