@@ -2,7 +2,7 @@
 % Please edit documentation in R/laus_get_data.R
 \name{laus_get_data}
 \alias{laus_get_data}
-\title{A wrapper function for blsAPI.R function that processes gathered Labor Are Unemployment Statistics (LAUS) data into a data frame}
+\title{A wrapper function for blsAPI.R function that processes gathered Labor Area Unemployment Statistics (LAUS) data into a data frame}
 \usage{
 laus_get_data(
   location.vector,
