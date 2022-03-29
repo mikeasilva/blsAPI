@@ -148,6 +148,30 @@ MichiganData <- blsQCEW('Area', year='2017', quarter='1', area='26000')
 
 Please see the help file for more options and example code.
 
+## Labor Area Unemployment Statistics Function
+The laus_get_data() function is a wrapper of the blsAPI() function that makes it easier to get the labor area unemployment data without knowing the Series ID for the specific area and measure you want. A few examples of a measure would be the unemployment rate, or the labor force. 
+
+#### Example
+This example pulls the unemployment rate for California, Florida, Texas, and Nevada from 2019 to 2021.
+
+```r
+library(rjson)
+library(blsAPI)
+library(dplyr)
+
+unemployment_rate <- laus_get_data(c("California", "Florida", "Texas", "Nevada"), "unemployment rate", 2019, 2021)
+```
+
+The resulting data frame will look like this for the first four rows
+|  year  |  period  |  periodName  |  Unemployment_Rate  | Location   |
+|:------:|:--------:|:------------:|:-------------------:|:----------:|
+|  2021  |   M07    | July         |   2.2               | California |
+|  2021  |   M06    | June         |   2.0               | California |
+|  2021  |   M05    | May          |   1.8               | California |
+|  2021  |   M04    | April        |   2.0               | California |
+
+For more examples of this function and to learn more about it type ?laus_get_data in your R console. 
+
 ## Learning More
 With the basics described above you can get started with the BLS API right away. To learn more see:  
 
