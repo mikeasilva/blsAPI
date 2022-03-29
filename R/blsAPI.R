@@ -70,7 +70,7 @@ blsAPI <- function(payload=NA, api_version=1, return_data_frame=FALSE){
     if (is.list(payload)){
       # Multiple Series or One or More Series, Specifying Years request
       payload <- toJSON(payload)
-      m <- regexpr('\\"seriesid\\":\\"[a-zA-Z0-9]*\\",', payload)
+      m <- regexpr('\\"seriesid\\":\\"[a-zA-Z0-9-]*\\",', payload)
       str <- regmatches(payload, m)
       if (length(str) > 0){
         # wrap single series in []
