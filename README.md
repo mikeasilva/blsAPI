@@ -87,7 +87,7 @@ payload <- list(
   'startyear'=2007,
   'endyear'=2009)
 response <- blsAPI(payload, 2)
-json <- fromJSON(response)
+json     <- fromJSON(response)
 
 ## Process results
 apiDF <- function(data) {
