@@ -83,9 +83,9 @@ library(ggplot2)
 
 ## Pull the data via the API
 payload <- list(
-  'seriesid'=c('LAUCN360610000000004', 'LAUCN360610000000006'),
-  'startyear'=2007,
-  'endyear'=2009)
+  'seriesid'  = c('LAUCN360610000000004', 'LAUCN360610000000006'),
+  'startyear' = 2007,
+  'endyear'   = 2009)
 response <- blsAPI(payload, 2)
 json     <- fromJSON(response)
 
