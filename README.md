@@ -91,7 +91,7 @@ json <- fromJSON(response)
 
 ## Process results
 apiDF <- function(data) {
-  df <- data.frame(matrix(unlist(data), nrow = length(data), byrow = TRUE))
+  df  <- data.frame(matrix(unlist(data), nrow = length(data), byrow = TRUE))
   colnames(df) <- c("year", "period", "periodName", "value")
   return(df)
 }
