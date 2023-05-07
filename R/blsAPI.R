@@ -26,16 +26,16 @@
 #'
 #' # One or More Series, Specifying Years
 #' payload <- list(
-#'  'seriesid'=c('LAUCN040010000000005','LAUCN040010000000006'),
-#'  'startyear'=2010,
-#'  'endyear'=2012)
+#'  'seriesid' = c('LAUCN040010000000005','LAUCN040010000000006'),
+#'  'startyear'= 2010,
+#'  'endyear'  = 2012)
 #' response <- blsAPI(payload)
 #' json <- fromJSON(response)
 #'
 #' # API Version 2.0 R Script Sample Code
 #' # Single Series
 #' response <- blsAPI('LAUCN040010000000005', 2)
-#' json <- fromJSON(response)
+#' json     <- fromJSON(response)
 #' # Or request a data frame
 #' df <- blsAPI('LAUCN040010000000005', 2, TRUE)
 #'
